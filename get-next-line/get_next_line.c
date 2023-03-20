@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 12:44:02 by vparlak           #+#    #+#             */
-/*   Updated: 2023/03/14 19:14:59 by vparlak          ###   ########.fr       */
+/*   Created: 2023/03/16 16:21:14 by vparlak           #+#    #+#             */
+/*   Updated: 2023/03/20 20:15:02 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,58 +18,92 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (*s++ != '\0')
 		i++;
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
+	char	*dst;
+	size_t	len_str;
 
-	i = 0;
-	if (dstsize == 0)
-		return (ft_strlen(src));
-	while (i < dstsize - 1 && src[i] != '\0')
+	len_str = ft_strlen(s);
+	if (start >= len_str)
 	{
-		dst[i] = src[i];
-		i++;
+		dst = (char *)malloc(sizeof(char));
+		if (!dst)
+			return (NULL);
+		*dst = '\0';
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	else
+	{
+		if ((len_str - start) < len)
+			len = len_str - start;
+		if (len_str >= len)
+			dst = (char *)malloc(len + 1);
+		else
+			dst = (char *)malloc(len_str + 1);
+		if (dst == NULL)
+			return (NULL);
+		ft_strlcpy(dst, s + start, len + 1);
+	}
+	return (dst);
 }
 
-
-char	*ft_strdup(const char *s1)
+char	*ft_divide_lines(char *buffer)
 {
-	size_t	len_s1;
-	char	*dst;
+	char	*str;
+	int		i;
 
-	len_s1 = ft_strlen(s1) + 1;
-	dst = (char *)malloc(len_s1);
-	if (dst == NULL)
-		return (dst);
-	ft_strlcpy(dst, s1, len_s1);
-	return (dst);
+	i = 0;
+	while (buffer[i] != '\n')
+		i++;
+	str = ft_substr(buffer, 0, i + 1);
+	free(buffer);
+	return (str);
+}
+
+char	*ft_reader(int fd, char *str)
+{
+	char	*buffer;
+	int		i;
+	int		is_first;
+
+	buffer = malloc(BUFFER_SIZE + 1);
+	i = 1;
+	is_first = 1;
+	while (i)
+	{
+		i = read(fd, buffer, BUFFER_SIZE);
+		buffer[i] = '\0';
+		if (is_first && i)
+		{
+			is_first = 0;
+			str = ft_strdup(buffer);
+		}
+		else
+			str = ft_strjoin(str, buffer);
+	}
+	free (buffer);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*str;
-	int		i;
-	char	*buffer;
+	static char	*buffer;
+	char		*line;
 
-	buffer = malloc(BUFFER_SIZE);
-	read(fd, buffer, BUFFER_SIZE);
-	i = 0;
-	while (i < BUFFER_SIZE)
+	buffer = ft_reader(fd, buffer);
+	if (*buffer == '\0')
 	{
-		if (buffer[i] == 10)
-			break ;
-		i++;
+		free(buffer);
+		return (NULL);
 	}
-	str = ft_strdup(buffer);
-	return (str);
+	line = ft_divide_lines(buffer);
+	buffer = ft_substr(buffer, ft_strlen(line), ft_strlen(buffer));
+	free(buffer);
+	return (line);
 }
 
 int	main(void)
@@ -82,5 +116,6 @@ int	main(void)
 	fd = open(path, O_RDONLY);
 	str = get_next_line(fd);
 	printf("%s", str);
+	fflush(stdout);
 	free(str);
 }
