@@ -6,14 +6,14 @@
 /*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:44:46 by vparlak           #+#    #+#             */
-/*   Updated: 2023/03/20 17:11:54 by vparlak          ###   ########.fr       */
+/*   Updated: 2023/03/20 23:23:14 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 6
+#  define BUFFER_SIZE 5
 # endif
 # include <unistd.h>
 # include <stdlib.h>

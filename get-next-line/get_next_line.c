@@ -6,12 +6,13 @@
 /*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 16:21:14 by vparlak           #+#    #+#             */
-/*   Updated: 2023/03/20 20:15:02 by vparlak          ###   ########.fr       */
+/*   Updated: 2023/03/20 23:42:01 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+// buffer kadar oku n line görüce bastır geri kalanı sub str il yeni bufferı ayarla bastırdğın kadarını yazdır tekrar
 
 size_t	ft_strlen(const char *s)
 {
@@ -60,7 +61,6 @@ char	*ft_divide_lines(char *buffer)
 	while (buffer[i] != '\n')
 		i++;
 	str = ft_substr(buffer, 0, i + 1);
-	free(buffer);
 	return (str);
 }
 
@@ -85,7 +85,6 @@ char	*ft_reader(int fd, char *str)
 		else
 			str = ft_strjoin(str, buffer);
 	}
-	free (buffer);
 	return (str);
 }
 
@@ -95,14 +94,8 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	buffer = ft_reader(fd, buffer);
-	if (*buffer == '\0')
-	{
-		free(buffer);
-		return (NULL);
-	}
 	line = ft_divide_lines(buffer);
 	buffer = ft_substr(buffer, ft_strlen(line), ft_strlen(buffer));
-	free(buffer);
 	return (line);
 }
 
@@ -111,7 +104,6 @@ int	main(void)
 	char	*path;
 	int		fd;
 	char	*str;
-
 	path = "./text.txt";
 	fd = open(path, O_RDONLY);
 	str = get_next_line(fd);
