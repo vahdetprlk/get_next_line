@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 22:56:57 by mkocabas          #+#    #+#             */
-/*   Updated: 2023/03/21 23:12:49 by vparlak          ###   ########.fr       */
+/*   Created: 2023/03/21 23:26:03 by vparlak           #+#    #+#             */
+/*   Updated: 2023/03/22 00:05:48 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <stdio.h>
 
 char	*ft_read_to_left_str(int fd, char *left_str)
 {
@@ -49,4 +50,40 @@ char	*get_next_line(int fd)
 	line = ft_get_line(left_str[fd]);
 	left_str[fd] = ft_new_left_str(left_str[fd]);
 	return (line);
+}
+
+int	main(void)
+{
+	char	*path;
+	char	*path2;
+	int		fd;
+	int		fd2;
+	char	*str;
+
+	path2 = "./testcopy.txt";
+	path = "./test.txt";
+	fd = open(path, O_RDONLY);
+	fd2 = open(path2, O_RDONLY);
+	str = get_next_line(fd2);
+	printf("%s", str);
+	fflush(stdout);
+	str = get_next_line(fd);
+	printf("%s", str);
+	fflush(stdout);
+		str = get_next_line(fd2);
+	printf("%s", str);
+	fflush(stdout);
+		str = get_next_line(fd);
+	printf("%s", str);
+	fflush(stdout);
+		str = get_next_line(fd2);
+	printf("%s", str);
+	fflush(stdout);
+		str = get_next_line(fd);
+	printf("%s", str);
+	fflush(stdout);
+		str = get_next_line(fd2);
+	printf("%s", str);
+	fflush(stdout);
+	free(str);
 }

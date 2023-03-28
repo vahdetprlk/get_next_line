@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 22:56:11 by mkocabas          #+#    #+#             */
-/*   Updated: 2023/03/21 23:14:14 by vparlak          ###   ########.fr       */
+/*   Created: 2023/03/21 23:25:32 by vparlak           #+#    #+#             */
+/*   Updated: 2023/03/21 23:54:03 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 5
 # endif
 
 char	*get_next_line(int fd);

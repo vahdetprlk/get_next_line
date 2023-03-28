@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkocabas <42istanbul.com.tr>               +#+  +:+       +#+        */
+/*   By: vparlak <vparlak@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 22:58:38 by mkocabas          #+#    #+#             */
-/*   Updated: 2023/01/17 22:58:42 by mkocabas         ###   ########.tr       */
+/*   Created: 2023/03/21 23:25:53 by vparlak           #+#    #+#             */
+/*   Updated: 2023/03/22 00:01:58 by vparlak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <stdio.h>
 
 size_t	ft_strlen(char *s)
 {
@@ -123,3 +124,4 @@ char	*ft_new_left_str(char *left_str)
 	free(left_str);
 	return (str);
 }
+
