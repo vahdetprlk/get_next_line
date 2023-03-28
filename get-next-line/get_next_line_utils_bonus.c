@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkocabas <42istanbul.com.tr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 22:58:16 by mkocabas          #+#    #+#             */
-/*   Updated: 2023/01/17 22:58:18 by mkocabas         ###   ########.tr       */
+/*   Created: 2023/01/17 22:58:38 by mkocabas          #+#    #+#             */
+/*   Updated: 2023/01/17 22:58:42 by mkocabas         ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
